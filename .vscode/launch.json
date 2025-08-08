@@ -1,31 +1,32 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Run AutoFlasher (package)",
-      "type": "debugpy",
-      "request": "launch",
-      "module": "sources",          
-      "cwd": "${workspaceFolder}",
-      "justMyCode": true
-    },
-    {
-      "name": "Run AutoFlasher (module main)",
-      "type": "debugpy",
-      "request": "launch",
-      "module": "sources",       
-      "cwd": "${workspaceFolder}",
-      "justMyCode": true
-    },
-
-    // Fallback: run the file directly (works if main.py has the import shim)
-    {
-      "name": "Run AutoFlasher (file fallback)",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/main.py",  // <--- If main.py is at root
-      "cwd": "${workspaceFolder}",
-      "justMyCode": true
-    }
-  ]
-}
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run AutoFlasher (package)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "autoflasher",           // <= match your folder name & case
+        "cwd": "${workspaceFolder}",
+        "justMyCode": true
+      },
+      {
+        "name": "Run AutoFlasher (module main)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "autoflasher.main",      // <= alternative if you prefer
+        "cwd": "${workspaceFolder}",
+        "justMyCode": true
+      },
+  
+      // Fallback: run the file directly (works if main.py has the import shim)
+      {
+        "name": "Run AutoFlasher (file fallback)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/autoflasher/main.py",
+        "cwd": "${workspaceFolder}",
+        "justMyCode": true
+      }
+    ]
+  }
+  

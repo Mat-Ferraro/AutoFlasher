@@ -1,10 +1,15 @@
 # main.py
-import os
 import sys
 import traceback
 import tkinter as tk
 from tkinter import messagebox
-from .gui import AutoFlasherApp  # relative import works when run as module/package
+from .main_view import AutoFlasherApp  # relative import works when run as module/package
+from autoflasher import config_service
+import os 
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+config = config_service.load_config(APP_ROOT)
+firmware_root = os.path.join(APP_ROOT, config.get("firmware_root", "firmware"))
 
 def run() -> None:
     root = tk.Tk()

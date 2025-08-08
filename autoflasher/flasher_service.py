@@ -1,12 +1,11 @@
 # flasher_service.py
-
 import os
 import re
 import tempfile
 import subprocess
 from typing import List, Optional
 
-from .jlink_commands import (
+from autoflasher.jlink_commands import (
     DeviceCommand, InterfaceCommand, SpeedCommand,
     ConnectCommand, UnlockKinetisCommand, ResetCommand, EraseCommand,
     WriteRegisterCommand, SleepCommand, LoadFileCommand, CommentCommand,
@@ -119,7 +118,11 @@ class FlasherService:
                 WriteRegisterCommand(1, 0x40023000, 0x80),
                 SleepCommand(5),
             ]
-        cmds += [ResetCommand(), GoCommand(), ExitCommand()]
+        cmds += [
+            ResetCommand(), 
+            GoCommand(), 
+            ExitCommand()
+            ]  
         return "\n".join(c.render() for c in cmds)
 
     def run_script(self, script_text: str) -> str:

@@ -5,9 +5,9 @@ import os
 import threading
 from typing import Callable, Optional, List, Any
 
-from .config import load_config, save_config, JLINK_WINDOWS, JLINK_UNIX
-from .flasher_service import FlasherService
-from .models import FlashOutcome
+from autoflasher.config_service import load_config, save_config, JLINK_WINDOWS, JLINK_UNIX
+from autoflasher.flasher_service import FlasherService
+from .firmware_models import FlashOutcome
 
 
 class AutoFlasherViewModel:

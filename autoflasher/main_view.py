@@ -6,11 +6,10 @@ import tkinter as tk
 from tkinter import messagebox, filedialog
 from tkinter.ttk import Label, Button, Combobox, Frame, Scrollbar
 
-from .view_model import AutoFlasherViewModel
+from .flasher_vm import AutoFlasherViewModel
 from .utils import write_log
 
 SUPPORTED_TARGETS = ("IO", "Delsys", "Logo")
-
 
 class AutoFlasherApp:
     """Tk 'View' layer. No business logic lives here—it's all in the ViewModel."""
