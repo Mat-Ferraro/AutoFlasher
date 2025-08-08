@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run AutoFlasher (package)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "AutoFlasher",           // <= match your folder name & case
+        "cwd": "${workspaceFolder}",
+        "justMyCode": true
+      },
+      {
+        "name": "Run AutoFlasher (module main)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "AutoFlasher.main",      // <= alternative if you prefer
+        "cwd": "${workspaceFolder}",
+        "justMyCode": true
+      },
+  
+      // Fallback: run the file directly (works if main.py has the import shim)
+      {
+        "name": "Run AutoFlasher (file fallback)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/AutoFlasher/main.py",
+        "cwd": "${workspaceFolder}",
+        "justMyCode": true
+      }
+    ]
+  }
+  
