@@ -1,26 +1,26 @@
-# gui.py
+# views/main_view.py
 from __future__ import annotations
 
-import os
 import tkinter as tk
 from tkinter import messagebox, filedialog
 from tkinter.ttk import Label, Button, Combobox, Frame, Scrollbar
 
-from .flasher_vm import AutoFlasherViewModel
-from .utils import write_log
+from ..flasher_vm import AutoFlasherViewModel
+from ..utils import write_log
 
 SUPPORTED_TARGETS = ("IO", "Delsys", "Logo")
 
 class AutoFlasherApp:
     """Tk 'View' layer. No business logic lives here—it's all in the ViewModel."""
 
-    def __init__(self, root: tk.Tk):
+    def __init__(self, root: tk.Tk, base_dir: str):
         self.root = root
+        self.base_dir = base_dir
+
         self.root.title("AcclaroMD AutoFlasher Utility")
         self.root.geometry("620x410")
 
         # --- ViewModel ---
-        self.base_dir = os.path.dirname(os.path.abspath(__file__))
         self.vm = AutoFlasherViewModel(self.base_dir)
         self.vm.on_status = self._on_status
         self.vm.on_log = self._on_log
@@ -173,7 +173,6 @@ class AutoFlasherApp:
         tk.Label(top, text="Default Folder:").pack(anchor="w", padx=12)
         folder_var = tk.StringVar(value=cfg.get("default_folder", ""))
         folder_combo = Combobox(top, textvariable=folder_var, state="readonly", width=28)
-        # this list gets refreshed on save, but show current set for now
         folder_combo["values"] = self.list_folders
         folder_combo.pack(anchor="w", padx=12, pady=(0, 8))
 
@@ -189,7 +188,6 @@ class AutoFlasherApp:
         btns.pack(fill="x", padx=10, pady=(0, 10))
 
         def save_changes():
-            # validate speed
             try:
                 speed_val = int(speed_var.get())
                 if speed_val <= 0:
@@ -198,11 +196,9 @@ class AutoFlasherApp:
                 messagebox.showerror("Invalid Input", "J-Link Speed must be a positive integer.", parent=top)
                 return
 
-            # normalize firmware extensions
             raw_exts = [e.strip() for e in fw_exts_var.get().split(",") if e.strip()]
             norm_exts = [(e if e.startswith(".") else f".{e}") for e in raw_exts]
 
-            # persist via VM
             self.vm.save_config(
                 jlink_path=jlink_var.get(),
                 interface=interface_var.get(),
@@ -213,7 +209,6 @@ class AutoFlasherApp:
                 firmware_exts=norm_exts,
             )
 
-            # refresh folder list from new firmware_root
             self.list_folders = self.vm.list_folders()
             self.combo_folder["values"] = self.list_folders
             self._apply_default_folder()
