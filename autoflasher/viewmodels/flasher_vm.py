@@ -7,7 +7,7 @@ from typing import Callable, Optional, List, Any
 
 from autoflasher.config_service import load_config, save_config, JLINK_WINDOWS, JLINK_UNIX
 from autoflasher.flasher_service import FlasherService
-from ..firmware_models import FlashOutcome
+from ..models.firmware_models import FlashOutcome
 
 
 class AutoFlasherViewModel:
