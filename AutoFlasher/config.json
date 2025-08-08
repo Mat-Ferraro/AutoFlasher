@@ -1,7 +1,0 @@
-{
-  "jlink_path": "JLink.exe",
-  "jlink_interface": "SWD",
-  "jlink_speed": 4000,
-  "default_folder": "UC-2.0.16",
-  "default_target": "IO"
-}
