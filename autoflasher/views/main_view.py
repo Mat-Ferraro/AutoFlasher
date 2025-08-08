@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import messagebox, filedialog
 from tkinter.ttk import Label, Button, Combobox, Frame, Scrollbar
 
-from ..flasher_vm import AutoFlasherViewModel
+from ..viewmodels.flasher_vm import AutoFlasherViewModel
 from ..utils import write_log
 import os
 
